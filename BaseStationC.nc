@@ -63,6 +63,7 @@
  * @author Philip Levis
  * @date August 10 2005
  */
+#include "printf.h"
 
 configuration BaseStationC {
 }
@@ -87,4 +88,6 @@ implementation {
   BaseStationP.RadioAMPacket -> Radio;
   
   BaseStationP.Leds -> LedsC;
+
 }
+
