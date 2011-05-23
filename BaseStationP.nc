@@ -151,6 +151,9 @@ implementation
 
 		message_t *ret = msg;
 		int avg = 0, i = 0;
+		printf("Group: %d\n", call RadioAMPacket.group(msg));
+		printfflush();
+		if ( call RadioAMPacket.destination(msg) != call RadioAMPacket.address()) return ret;
 
 		if (len == sizeof(temperature_t)) {
 			temperature_t* tmpptr = (temperature_t*)payload;
@@ -159,6 +162,7 @@ implementation
 			for (i = 0; i < NREADINGS ; i++) {
 				avg = avg + tmpptr->readings[i];
 				printf("%d %d \n", tmpptr->count*10 + i, tmpptr->readings[i]);
+			printfflush();
 			}
 			avg = avg / NREADINGS;
 			printf("average: %d\n", avg);
