@@ -150,19 +150,14 @@ implementation
 	message_t* receive(message_t *msg, void *payload, uint8_t len) {
 
 		message_t *ret = msg;
-		int avg = 0, i = 0;
+		int avg = 0;
 
 		if (len == sizeof(temperature_t)) {
 			temperature_t* tmpptr = (temperature_t*)payload;
-			printf("\n---------------------------\n");
-			for (i = 0; i < NREADINGS ; i++) {
-				avg = avg + tmpptr->readings[i];
-				printf("%d %d \n", tmpptr->count*10 + i, tmpptr->readings[i]);
-			}
-			avg = avg / NREADINGS;
-			printf("average: %d\n", avg);
+			avg = tmpptr->average;
+			printf("received average: %d\n", avg);
 			printfflush();
-			if (avg <= 2800) {
+			if (avg <= 2700) {
 				call Leds.led1Off();
 				call Leds.led0On();
 			} else {
