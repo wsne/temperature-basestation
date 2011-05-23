@@ -159,15 +159,12 @@ implementation
 			temperature_t* tmpptr = (temperature_t*)payload;
 			printf("\n---------------------------\n");
 			printf("From sensor: %d\n", tmpptr->id);
-			for (i = 0; i < NREADINGS ; i++) {
-				avg = avg + tmpptr->readings[i];
-				printf("%d %d \n", tmpptr->count*10 + i, tmpptr->readings[i]);
-			printfflush();
+			for (i = 0; i < NAVERAGES ; i++) {
+				printf("avg: %d %d \n", i,  tmpptr->averages[i]);
+				printfflush();
 			}
-			avg = avg / NREADINGS;
-			printf("average: %d\n", avg);
-			printfflush();
-			if (avg <= 2800) {
+			avg = tmpptr->averages[9];
+			if (avg <= 2600) {
 				call Leds.led1Off();
 				call Leds.led0On();
 			} else {
