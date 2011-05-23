@@ -155,6 +155,7 @@ implementation
 		if (len == sizeof(temperature_t)) {
 			temperature_t* tmpptr = (temperature_t*)payload;
 			printf("\n---------------------------\n");
+			printf("From sensor: %d\n", tmpptr->id);
 			for (i = 0; i < NREADINGS ; i++) {
 				avg = avg + tmpptr->readings[i];
 				printf("%d %d \n", tmpptr->count*10 + i, tmpptr->readings[i]);
